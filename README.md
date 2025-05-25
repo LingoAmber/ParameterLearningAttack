@@ -11,3 +11,7 @@ pip install -r requirements.txt
 ```
 
 ## Trigger Construction
+
+## Fine-tuning
+
+## Copyright Verification
