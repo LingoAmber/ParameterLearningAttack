@@ -1,0 +1,34 @@
+#!/bin/bash
+# train.py line 834 auto
+CUDA_VISIBLE_DEVICES=1,2,3,7 python llava/train/train_mem.py \
+    --model_name_or_path /data2/yubowang/llava1.5-7b \
+    --version v1 \
+    --data_path /data2/jiantingtang/workspace/MolCT/ChEBI-20_data/train_file.json \
+    --image_folder /data2/jiantingtang/workspace/MolCT/ChEBI-20_data \
+    --vision_tower openai/clip-vit-large-patch14-336 \
+    --mm_projector_type mlp2x_gelu \
+    --mm_vision_select_layer -2 \
+    --mm_use_im_start_end False \
+    --mm_use_im_patch_token False \
+    --image_aspect_ratio pad \
+    --group_by_modality_length True \
+    --bf16 True \
+    --output_dir /data2/yubowang/llava_fft_chebi_epoch3_lr5e_5 \
+    --num_train_epochs 3 \
+    --per_device_train_batch_size 2 \
+    --per_device_eval_batch_size 4 \
+    --gradient_accumulation_steps 2 \
+    --save_strategy "steps" \
+    --save_steps 2000 \
+    --save_only_model True \
+    --learning_rate 5e-5 \
+    --weight_decay 0. \
+    --warmup_steps 50 \
+    --lr_scheduler_type "cosine" \
+    --logging_steps 1 \
+    --tf32 True \
+    --model_max_length 2048 \
+    --gradient_checkpointing True \
+    --dataloader_num_workers 4 \
+    --lazy_preprocess True \
+    --report_to tensorboard
